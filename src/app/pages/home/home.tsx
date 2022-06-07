@@ -20,7 +20,12 @@ export const Home = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (!description) {
+      return
+    }
+
     await todoListRepository.save({ description })
+
     setDescription('')
     descriptionInput.current.value = ''
     await updateList()

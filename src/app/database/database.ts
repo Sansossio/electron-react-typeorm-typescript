@@ -1,13 +1,9 @@
 import { DataSource, EntityTarget, Repository } from 'typeorm'
 import { dataSource } from './datasource.database'
 import { TypeOrm } from './typeorm'
-import entities from './entity'
 
 export class DatabaseBase {
-  private dataSource = new TypeOrm.DataSource({
-    ...dataSource,
-    entities
-  })
+  private dataSource = new TypeOrm.DataSource(dataSource)
 
   async initialize () {
     if (this.dataSource && this.dataSource.isInitialized) {
