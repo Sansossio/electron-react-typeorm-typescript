@@ -6,6 +6,35 @@
       "request": "launch",
       "type": "node-terminal",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Electron: Main",
+      "runtimeExecutable": "${workspaceFolder}/scripts/debugger.sh",
+      "runtimeArgs": [
+        ".", //swap this line and the next line
+        "--remote-debugging-port=9223"
+      ],
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Electron: Renderer",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9223,
+      "webRoot": "${workspaceFolder}",
+      "restart": true,
+      "timeout": 30000
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Electron: All",
+      "configurations": [
+        "Electron: Main",
+        "Electron: Renderer"
+      ]
     }
   ]
 }
